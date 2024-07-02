@@ -1,0 +1,15 @@
+import * 
+
+"""
+cardvalues = ["K", # Knigh
+              "M", # Mage
+              "R"] # Ranger
+                
+cardsuits = ['A', # Air
+             'W', # Water 
+            'E', # Earth
+            'F'] # Fire
+""" 
+  
+class C:
+  def __init__(self):
