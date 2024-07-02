@@ -1,5 +1,3 @@
-import * 
-
 """
 cardvalues = ["K", # Knigh
               "M", # Mage
@@ -11,5 +9,6 @@ cardsuits = ['A', # Air
             'F'] # Fire
 """ 
   
-class C:
+class Cards:
   def __init__(self):
+    pass
