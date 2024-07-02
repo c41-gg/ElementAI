@@ -2,14 +2,46 @@ from Settings import *
 from Hands import *
 from Cards import *
 
-import pygame
+import pygame, random, sys
 
 """
     main class
 
 """
+
+
 class Game:
-  pass
+  # Set up
+  def __init__(self):
+  
+    pygame.init()
+    screen_width = 800
+    screeen_height = 640
+    screen = pygame.display.set_mode(screen_width, screeen_height)
+
+    pygame.display.set_caption("ElementAI")
+
+    boxes = []
+    images = []
+  
+  def run(self):
+
+    while True:
+      # Handle quit operation
+      for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+          pygame.quit()
+          sys.exit()
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
+          if event.button == 1:  # Left mouse button
+            mouse_down = True
+
+        if event.type == pygame.MOUSEBUTTONUP:
+          if event.button == 1:  # Left mouse button
+            if mouse_down:
+              mouse_down = False
+              self.hand = Hands()
 
 
 if __name__ == '__main__':

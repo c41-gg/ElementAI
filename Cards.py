@@ -1,5 +1,5 @@
 """
-cardvalues = ["K", # Knigh
+cardvalues = ["K", # Knight
               "M", # Mage
               "R"] # Ranger
                 
