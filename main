@@ -11,15 +11,15 @@ import pygame, random, sys
 
 
 class Game:
-  # Set up
   def __init__(self):
-  
-    pygame.init()
-    screen_width = 800
-    screeen_height = 640
-    screen = pygame.display.set_mode(screen_width, screeen_height)
+    
+    # Set up
 
-    pygame.display.set_caption("ElementAI")
+    pygame.init()
+    self.screen = pygame.display.set_mode((height, width))
+    pygame.display.set_caption(title)
+    self.clock = pygame.time.Clock()
+    self.hand = Hands()
 
     boxes = []
     images = []
