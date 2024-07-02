@@ -19,10 +19,10 @@ class Game:
     self.screen = pygame.display.set_mode((height, width))
     pygame.display.set_caption(title)
     self.clock = pygame.time.Clock()
-    self.hand = Hands()
+    # self.hand = Hands()
 
-    boxes = []
-    images = []
+    # boxes = []
+    # images = []
   
   def run(self):
 
