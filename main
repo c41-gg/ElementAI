@@ -2,13 +2,9 @@ from Settings import *
 from Hands import *
 from Cards import *
 
-import pygame, sys
+import pygame, sys, ctypes
 
-"""
-    main class
-
-"""
-
+ctypes.windll.user32.SetProcessDPIAware()
 
 class Game:
   def __init__(self):
@@ -16,10 +12,10 @@ class Game:
     # Set up
 
     pygame.init()
-    self.screen = pygame.display.set_mode((height, width))
+    self.screen = pygame.display.set_mode((width, height))
     pygame.display.set_caption(title)
     self.clock = pygame.time.Clock()
-    # self.hand = Hands()
+    self.hand = Hands()
 
     # boxes = []
     # images = []
@@ -35,15 +31,15 @@ class Game:
           pygame.quit()
           sys.exit()
 
-        if event.type == pygame.MOUSEBUTTONDOWN:
-          if event.button == 1:  # Left mouse button
-            mouse_down = True
+        # if event.type == pygame.MOUSEBUTTONDOWN:
+        #   if event.button == 1:  # Left mouse button
+        #     mouse_down = True
 
-        if event.type == pygame.MOUSEBUTTONUP:
-          if event.button == 1:  # Left mouse button
-            if mouse_down:
-              mouse_down = False
-              self.hand = Hands()
+        # if event.type == pygame.MOUSEBUTTONUP:
+        #   if event.button == 1:  # Left mouse button
+        #     if mouse_down:
+        #       mouse_down = False
+        #       self.hand = Hands()
 
 
       # Time variable
