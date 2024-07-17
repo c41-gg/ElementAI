@@ -1,48 +1,69 @@
-from collections import namedtuple
-from Settings import *
-import pygame, random
+import pygame
 
-CardTuple = namedtuple('Card', ['value', 'suit'])
+ratio = 8
+card_width = int(691 / ratio)
+card_height = int(1056 / ratio)
+WIDTH, HEIGHT = 1280, 720
 
-cardvalues = ["K", # Knight
-              "M", # Mage
-              "R"] # Ranger
-                
-cardsuits = ['A', # Air
-             'W', # Water 
-            'E', # Earth
-            'F'] # Fire
 
-class Cards:
-  def __init__(self, input_value, input_suit):   
-    self.animation_start_time = pygame.time.get_ticks()
-    self.animation_complete = False
-    self.uuid = None
-    self.position = None
-    self.start_position = (0, 1080)
-    self.orig_position = self.start_position
-    self.data = CardTuple(value=input_value, suit=input_suit)
-    self.id = f"{self.data.value}{self.data.suit}"
-    self.img = f"images/cards/{self.id}.png"
-    self.card_rotation_angle = random.uniform(-3, 3)
-    self.card_img = pygame.image.load(self.img)
-    self.card_img = pygame.transform.scale(self.card_img, (self.card_img.get_width() * 4, self.card_img.get_height() * 4))
-    self.card_rot = pygame.transform.rotate(self.card_img, self.card_rotation_angle)
-    self.card_bounding_rect = self.card_rot.get_bounding_rect()
-    self.card_surf = pygame.Surface(self.card_bounding_rect.size, pygame.SRCALPHA)
+# class Card:
+class Card(pygame.sprite.Sprite):
+    def __init__(self, image, type_card=''):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = image
+        self.image = pygame.transform.scale(image, (card_width, card_height))
+        self.type_card = ''
+        self.rect = self.image.get_rect()
 
-    # Calculate the position to blit the rotated image onto the surface
-    blit_pos = (0, 0)
-    self.card_surf.blit(self.card_rot, blit_pos)
+    def _x_cor(self, width_space):
+        x_coef = [-2 + i for i in range(5)]
+        x_coor = []
+        for i in range(5):
+            x_coor.append(WIDTH // 2 + x_coef[i] * (card_width + width_space))
+        return x_coor
 
-    # Random y value for card
-    self.card_y = (P1_C1[1] - self.card_surf.get_height() // 2) + random.randint(-20, 20)
+    def put_in_place(self):
+        """
+        function place card
+        :return:
+        """
+        x_c = self._x_cor(10)
+        if self.type_card == 'first_card_player':
+            self.rect.centerx = (WIDTH - card_width) // 2 - 5
+            self.rect.bottom = HEIGHT - 80
 
-class Player:
-  def __init__(self):
-    self.cards = []
-    
-class Flop:
-  def __init__(self):
-    self.cards = []
+        elif self.type_card == 'second_card_player':
+            self.rect.centerx = (WIDTH + card_width) // 2 + 5
+            self.rect.bottom = HEIGHT - 80
+
+        elif self.type_card == 'first_card_opponent':
+            self.rect.centerx = (WIDTH - card_width) // 2 - 5
+            self.rect.bottom = 150
+
+        elif self.type_card == 'second_card_opponent':
+            self.rect.centerx = (WIDTH + card_width) // 2 + 5
+            self.rect.bottom = 150
+
+        elif self.type_card == 'first_card_flop':
+            self.rect.centerx = x_c[0]
+            self.rect.bottom = HEIGHT // 2 + self.image.get_height() // 2 + 30
+
+        elif self.type_card == 'second_card_flop':
+            self.rect.centerx = x_c[1]
+            self.rect.bottom = HEIGHT // 2 + self.image.get_height() // 2 + 30
+
+        elif self.type_card == 'third_card_flop':
+            self.rect.centerx = x_c[2]
+            self.rect.bottom = HEIGHT // 2 + self.image.get_height() // 2 + 30
+
+        elif self.type_card == 'turn_card':
+            self.rect.centerx = x_c[3]
+            self.rect.bottom = HEIGHT // 2 + self.image.get_height() // 2 + 30
+
+        elif self.type_card == 'river_card':
+            self.rect.centerx = x_c[4]
+            self.rect.bottom = HEIGHT // 2 + self.image.get_height() // 2 + 30
+        # win.blit(self.image, (self.rect.centerx, self.rect.top))
+
+
 
