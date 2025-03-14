@@ -1,5 +1,5 @@
 import pygame
-from constants import BACKGROUND_MENU, button_new_game_image, button_exit_image, WHITE, WIDTH, WIN, HEIGHT
+from constants import BACKGROUND_MENU, button_new_game_image, button_exit_image, WHITE, WIDTH, WIN, HEIGHT, Card
 
 pygame.init()
 
